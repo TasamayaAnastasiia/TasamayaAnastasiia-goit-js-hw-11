@@ -4,6 +4,8 @@ import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
+import '../css/loader.css';
+
 const formForSearching = document.querySelector(".form_images");
 const inputSearch = document.querySelector(".input_searching");
 const gallery = document.querySelector(".image-gallery");
