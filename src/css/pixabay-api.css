@@ -58,6 +58,9 @@ img {
   font-weight: 500;
   border: 1px solid #808080
 }
+.button_submit:hover {
+  background-color: #6C8CFF;
+}
 .input_searching:focus {
   border: 1px solid #4E75FF;
 }
