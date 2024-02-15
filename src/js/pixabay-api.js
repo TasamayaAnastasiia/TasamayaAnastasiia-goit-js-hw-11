@@ -8,7 +8,7 @@ const formForSearching = document.querySelector(".form_images");
 const inputSearch = document.querySelector(".input_searching");
 
 
-formForSearching.addEventListener("submit", async (e) => {
+formForSearching.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const searchQuery = inputSearch.value.trim();
@@ -28,20 +28,23 @@ formForSearching.addEventListener("submit", async (e) => {
         safesearch: true,
     });
 
-    try {
-        const response = await fetch(`https://pixabay.com/api/?${searchParams}`);
-        if (!response.ok) {
-            throw new Error("Failed to fetch images");
-        }
-        const data = await response.json();
-        if (data.hits.length === 0) {
-            throw new Error("No images found");
-        }
-        renderImages(data.hits);
-    } catch (error) {
-        iziToast.error({
-            title: "Error",
-            message: error.message,
+    fetch(`https://pixabay.com/api/?${searchParams.toString()}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch images");
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.hits.length === 0) {
+                throw new Error("No images found");
+            }
+            renderImages(data.hits);
+        })
+        .catch(error => {
+            iziToast.error({
+                title: "Error",
+                message: error.message,
+            });
         });
-    }
 });
